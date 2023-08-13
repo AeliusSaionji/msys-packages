@@ -1,0 +1,21 @@
+lua=lua5.4
+version=1.1.0
+lib_name=lpeg
+libs_private=
+url=http://www.inf.puc-rio.br/~roberto/lpeg.html
+requires=
+conflicts=
+
+prefix=/usr
+libdir=${prefix}/lib/lua/5.4
+includedir=${prefix}/include
+
+Name: Lua ${lib_name}
+Description: Lua ${lib_name} engine
+Version: ${version}
+URL: ${url}
+Requires: ${requires} ${lua}
+Conflicts: ${conflicts}
+Libs: -L${libdir} -l${lib_name} 
+Libs.private: ${libs_private}
+Cflags: -I${includedir}

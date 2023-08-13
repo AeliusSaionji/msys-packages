@@ -1,0 +1,17 @@
+post_install() {
+  cd usr/share/vis/
+  ln -fs lexers/lexer.lua
+
+  cd themes
+  ln -fs zenburn.lua -T default-256.lua
+  ln -fs dark-16.lua -T default-16.lua
+}
+
+post_upgrade() {
+  cd usr/share/vis/
+  ln -fs lexers/lexer.lua
+
+  cd themes
+  ln -fs zenburn.lua -T default-256.lua
+  ln -fs dark-16.lua -T default-16.lua
+}
