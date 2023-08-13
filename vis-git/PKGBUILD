@@ -1,0 +1,92 @@
+# Maintainer: Christian Hesse <mail@eworm.de>
+
+pkgname=vis-git
+pkgver=0.7.1.r78.gadc803f2
+pkgrel=1
+pkgdesc='modern, legacy free, simple yet efficient vim-like editor'
+arch=('x86_64')
+url='https://github.com/martanne/vis#vis-a-vim-like-text-editor'
+# depends=('acl' 'libacl.so' 'bash' 'ncurses' 'libncursesw.so' 'libtermkey'
+#          'libtermkey.so' 'lua' 'lua-lpeg' 'tre' 'file')
+# optdepends=('wl-clipboard: wayland clipboard support'
+#             'xclip: X11 clipboard support'
+#             'xsel: X11 clipboard support')
+# makedepends=('git')
+# checkdepends=('vim')
+license=('custom:ISC')
+backup=('etc/vis/visrc.lua')
+install=('vis-fix-syms.install')
+# validpgpkeys=('54A47F12462D26A7D078A932C83A52CD1962562C') # Marc André Tanner <mat@brain-dump.org>
+# TODO: can we have signed tag back?
+source=("git+https://github.com/martanne/vis.git"
+        # 'git+https://github.com/martanne/vis-test.git'
+        'vis-fix-syms.install')
+sha256sums=('SKIP'
+            '021d94d9bf2665c47c48b93883c2c41c47efc74fb678e9f66f98b71a7386385f')
+
+_backports=(
+)
+
+_reverts=(
+)
+
+# prepare() {
+  # cd vis/
+
+  # git config --file=.gitmodules submodule.test.url ../vis-test/
+  # git update-index --assume-unchanged .gitmodules
+  # git submodule init
+  # git -c protocol.file.allow=always submodule update
+  # 
+  # local _c
+  # for _c in "${_backports[@]}"; do
+    # git log --oneline -1 "${_c}"
+    # git cherry-pick -n "${_c}"
+  # done
+  # for _c in "${_reverts[@]}"; do
+    # git log --oneline -1 "${_c}"
+    # git revert -n "${_c}"
+  # done
+
+# }
+
+pkgver() {
+  cd vis/
+
+  if GITTAG="$(git describe --abbrev=0 --tags 2>/dev/null)"; then
+    printf '%s.r%s.g%s' \
+    "$(sed -e "s/^${pkgname%%-git}//" -e 's/^[-_/a-zA-Z]\+//' -e 's/[-_+]/./g' <<< ${GITTAG})" \
+    "$(git rev-list --count ${GITTAG}..)" \
+    "$(git rev-parse --short HEAD)"
+  else
+    printf '0.r%s.g%s' \
+    "$(git rev-list --count master)" \
+    "$(git rev-parse --short HEAD)"
+  fi
+}
+
+build() {
+  cd vis/
+
+  env ./configure \
+    --prefix=/usr
+
+  env make
+}
+
+# fails for some reason
+# check() {
+#   cd vis/
+
+#   env make -C test/
+# }
+
+package() {
+  cd vis/
+
+  env make DESTDIR="${pkgdir}" install
+
+  install -D -m0644 lua/visrc.lua "${pkgdir}"/etc/vis/visrc.lua
+
+  install -D -m0644 'LICENSE' "${pkgdir}/usr/share/licenses/vis/LICENSE"
+}
