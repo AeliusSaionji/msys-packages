@@ -13,6 +13,7 @@ url='https://github.com/martanne/vis#vis-a-vim-like-text-editor'
 #             'xsel: X11 clipboard support')
 # makedepends=('git')
 # checkdepends=('vim')
+conflicts=('vis')
 license=('custom:ISC')
 backup=('etc/vis/visrc.lua')
 install=('vis-fix-syms.install')
