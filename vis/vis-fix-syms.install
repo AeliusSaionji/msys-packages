@@ -7,6 +7,12 @@ post_install() {
   ln -fs dark-16.lua -T default-16.lua
 }
 
+pre_upgrade() {
+  rm usr/share/vis/lexer.lua
+  rm usr/share/vis/themes/default-256.lua
+  rm usr/share/vis/themes/default-16.lua
+}
+
 post_upgrade() {
   cd usr/share/vis/
   ln -fs lexers/lexer.lua
@@ -14,4 +20,10 @@ post_upgrade() {
   cd themes
   ln -fs zenburn.lua -T default-256.lua
   ln -fs dark-16.lua -T default-16.lua
+}
+
+pre_remove() {
+  rm usr/share/vis/lexer.lua
+  rm usr/share/vis/themes/default-256.lua
+  rm usr/share/vis/themes/default-16.lua
 }

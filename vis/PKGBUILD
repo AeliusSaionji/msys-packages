@@ -23,7 +23,7 @@ source=("https://github.com/martanne/vis/releases/download/v${pkgver}/vis-${pkgv
         #'git+https://github.com/martanne/vis-test.git'
         'vis-fix-syms.install')
 sha256sums=('61b10d40f15c4db2ce16e9acf291dbb762da4cbccf0cf2a80b28d9ac998a39bd'
-            'e1795d37cfbfa6f168cd20d796ccb67b70130006fc6e43466b430f42aa86ce91')
+            '021d94d9bf2665c47c48b93883c2c41c47efc74fb678e9f66f98b71a7386385f')
 
 _backports=(
 )
