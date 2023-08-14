@@ -15,13 +15,16 @@ makedepends=('libtool' 'unibilium')
 #              "${MINGW_PACKAGE_PREFIX}-unibilium"
 #              "libtool")
 source=("https://www.leonerd.org.uk/code/${_realname}/${_realname}-${pkgver}.tar.gz"
-        0001-make-remove-demos-sources.patch)
+        0001-make-remove-demos-sources.patch
+        unibilium-in-pc.patch)
 sha256sums=('6945bd3c4aaa83da83d80a045c5563da4edd7d0374c62c0d35aec09eb3014600'
-            '6492da0d94b47628318af8ef863f03d6e36fdb7633e426b80b34668f981c2d21')
+            '6492da0d94b47628318af8ef863f03d6e36fdb7633e426b80b34668f981c2d21'
+            '4d2d3dd6929dc61066e48e397114f87cf3f216eba4cb5cc3dcfc0afbf9eb34f7')
 
 prepare() {
   cd "${srcdir}/${_realname}-${pkgver}"
   patch -p1 -i "${srcdir}/0001-make-remove-demos-sources.patch"
+  patch -p1 -i "${srcdir}/unibilium-in-pc.patch"
 }
 
 build() {
