@@ -1,0 +1,36 @@
+# Hacked together for msys2 by Aelius
+_realname=unibilium
+pkgbase=${_realname}
+pkgname=${_realname}
+pkgver=2.1.1
+pkgrel=2
+pkgdesc="A terminfo parsing library (msys)"
+arch=('i686' 'x86_64')
+url='https://github.com/neovim/unibilium'
+makedepends=("autotools")
+# makedepends=("${MINGW_PACKAGE_PREFIX}-cc" "${MINGW_PACKAGE_PREFIX}-autotools")
+license=(LGPL3)
+source=("${_realname}-${pkgver}.tar.gz::https://github.com/neovim/unibilium/archive/v${pkgver}.tar.gz"
+        "0001-unibilium-msys-makefile.patch")
+sha256sums=('6f0ee21c8605340cfbb458cbd195b4d074e6d16dd0c0e12f2627ca773f3cabf1'
+            '62d9b9e6650e4abc44afdb800469ca2332b70abbcacfd6e554f0a0ce7f4d3351')
+
+prepare() {
+  cd "${_realname}-${pkgver}"
+  patch -Np1 -i "${srcdir}/0001-unibilium-msys-makefile.patch"
+}
+
+build() {
+  cd ${_realname}-${pkgver}
+  make PREFIX=${MINGW_PREFIX}
+}
+
+check() {
+  cd ${_realname}-${pkgver}
+  make test
+}
+
+package() {
+  cd ${_realname}-${pkgver}
+  make install PREFIX=${MINGW_PREFIX} DESTDIR="${pkgdir}"
+}
