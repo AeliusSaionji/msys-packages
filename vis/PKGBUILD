@@ -1,11 +1,14 @@
+# Hacked together for msys2 by Aelius
 # Maintainer: Christian Hesse <mail@eworm.de>
 
 pkgname=vis
 pkgver=0.8
 pkgrel=1
-pkgdesc='modern, legacy free, simple yet efficient vim-like editor'
-arch=('x86_64')
+pkgdesc='modern, legacy free, simple yet efficient vim-like editor (msys)'
+arch=('x86_64' 'i686')
 url='https://github.com/martanne/vis#vis-a-vim-like-text-editor'
+# Technically some of these are compile-time optdepends
+makedepends=('ncurses-devel' 'libtermkey' 'lua' 'lua-lpeg' 'libtre-devel-git')
 # depends=('acl' 'libacl.so' 'bash' 'ncurses' 'libncursesw.so' 'libtermkey'
 #          'libtermkey.so' 'lua' 'lua-lpeg' 'tre' 'file')
 # optdepends=('wl-clipboard: wayland clipboard support'
@@ -34,7 +37,6 @@ _reverts=(
 prepare() {
   tar xf vis-${pkgver}.tar.gz --directory=${srcdir} 2>/dev/null || true
   tar xf vis-${pkgver}.tar.gz --directory=${srcdir}
-
 
   # cd ${srcdir}/${pkgname}-${pkgver}
   #

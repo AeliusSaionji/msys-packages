@@ -1,3 +1,4 @@
+# Hacked together for msys2 by Aelius
 # Maintainer: David Macek <david.macek.0@gmail.com>
 # Contributor (Arch Linux): Gustavo Alvarez <sl1pkn07@gmail.com>
 # Contributor: Felix Huettner <huettner94@gmx.de>
@@ -10,6 +11,7 @@ pkgrel=1
 arch=('i686' 'x86_64')
 url='http://www.inf.puc-rio.br/~roberto/lpeg/'
 license=('MIT')
+makedepends=('lua')
 # makedepends=("${MINGW_PACKAGE_PREFIX}-lua"
 #              "${MINGW_PACKAGE_PREFIX}-lua51"
 #              "${MINGW_PACKAGE_PREFIX}-cc")

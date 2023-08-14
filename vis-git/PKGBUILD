@@ -1,11 +1,14 @@
+# Hacked together for msys2 by Aelius
 # Maintainer: Christian Hesse <mail@eworm.de>
 
 pkgname=vis-git
 pkgver=0.7.1.r78.gadc803f2
 pkgrel=1
-pkgdesc='modern, legacy free, simple yet efficient vim-like editor'
-arch=('x86_64')
+pkgdesc='modern, legacy free, simple yet efficient vim-like editor (msys)'
+arch=('x86_64' 'i686')
 url='https://github.com/martanne/vis#vis-a-vim-like-text-editor'
+# Technically some of these are compile-time optdepends
+makedepends=('ncurses-devel' 'libtermkey' 'lua' 'lua-lpeg' 'libtre-devel-git')
 # depends=('acl' 'libacl.so' 'bash' 'ncurses' 'libncursesw.so' 'libtermkey'
 #          'libtermkey.so' 'lua' 'lua-lpeg' 'tre' 'file')
 # optdepends=('wl-clipboard: wayland clipboard support'
@@ -38,7 +41,7 @@ _reverts=(
   # git update-index --assume-unchanged .gitmodules
   # git submodule init
   # git -c protocol.file.allow=always submodule update
-  # 
+  #
   # local _c
   # for _c in "${_backports[@]}"; do
     # git log --oneline -1 "${_c}"
