@@ -1,0 +1,32 @@
+_realname=senpai
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}-git")
+pkgver=v0.2.0.r34.gc9cbb9d
+pkgrel=1
+pkgdesc='terminal irc client written in go'
+mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
+url='https://git.sr.ht/~taiite/senpai'
+license=('ISC')
+makedepends=("${MINGW_PACKAGE_PREFIX}-scdoc" "${MINGW_PACKAGE_PREFIX}-go")
+source=('git+https://git.sr.ht/~taiite/senpai')
+sha256sums=('SKIP')
+options=('!strip') #won't run otherwise
+
+pkgver() {
+  cd "${srcdir}/senpai"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "${srcdir}/senpai"
+  # cgo temp fix....
+  # firstly, this isn't the best way to pass goflags
+  # second, no idea what this does
+  env CGO_ENABLED=0 make all
+}
+
+package() {
+  cd "${srcdir}/senpai"
+  make PREFIX=/usr DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}

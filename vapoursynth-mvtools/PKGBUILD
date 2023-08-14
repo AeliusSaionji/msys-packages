@@ -1,0 +1,27 @@
+_pkgname=vapoursynth-mvtools
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}")
+pkgver=23
+pkgrel=1
+pkgdesc='vapoursynth motion interpolation library'
+mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
+url='https://github.com/dubhater/vapoursynth-mvtools'
+license=('GPL2')
+makedepends=("${MINGW_PACKAGE_PREFIX}-meson" "${MINGW_PACKAGE_PREFIX}-nasm")
+source=("https://github.com/dubhater/vapoursynth-mvtools/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('3b5fdad2b52a2525764510a04af01eab3bc5e8fe6a02aba44b78955887a47d44')
+# options=('')
+conflicts=("${MINGW_PACKAGE_PREFIX}-vapoursynth-mvtools-git")
+
+build() {
+  cd $_pkgname-$pkgver
+  mkdir -p build; cd build
+  meson ../
+  ninja
+}
+
+package() {
+  cd $_pkgname-$pkgver
+  install -Dm644 build/libavx2.a        "$pkgdir/ucrt64/lib/libavx2.a"
+  install -Dm644 build/libmvtools.dll   "$pkgdir/ucrt64/lib/libmvtools.dll"
+  install -Dm644 build/libmvtools.dll.a "$pkgdir/ucrt64/lib/libmvtools.dll.a"
+}
