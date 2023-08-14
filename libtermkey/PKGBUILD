@@ -1,3 +1,4 @@
+# Hacked together for msys2 by Aelius
 # Maintainer: Biswapriyo Nath <nathbappai@gmail.com>
 
 _realname=libtermkey
@@ -5,10 +6,11 @@ pkgbase=${_realname}
 pkgname=${_realname}
 pkgver=0.22
 pkgrel=1
-pkgdesc='Library for easy processing of keyboard entry from terminal-based programs (mingw-w64)'
+pkgdesc='Library for easy processing of keyboard entry from terminal-based programs (msys)'
 arch=('i686' 'x86_64')
 url='https://www.leonerd.org.uk/code/libtermkey'
 license=('spdx:MIT')
+makedepends=('libtool' 'unibilium')
 # makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
 #              "${MINGW_PACKAGE_PREFIX}-unibilium"
 #              "libtool")
