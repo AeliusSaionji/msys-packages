@@ -1,0 +1,30 @@
+_pkgname=mdcat
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
+pkgver=2.0.3.1011.g7f6322b
+pkgrel=1
+pkgdesc='Fuzzy Search + tree + cd; a better way to navigate directories'
+mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
+url='https://dystroy.org/broot/'
+license=('MIT')
+makedepends=("${MINGW_PACKAGE_PREFIX}-rust") #not detected? "${MINGW_PACKAGE_PREFIX}-asciidoctor"
+source=("git+https://github.com/swsnr/${_pkgname}.git")
+sha256sums=('SKIP')
+# options=('')
+conflicts=("${MINGW_PACKAGE_PREFIX}-mdcat")
+
+pkgver() {
+  cd "${_pkgname}"
+  echo "$(grep '^version =' Cargo.toml|head -n1|cut -d\" -f2|cut -d\- -f1).$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "${_pkgname}"
+  cargo build --features=static --release
+}
+
+package() {
+  cd "${_pkgname}"
+  install -Dt "${pkgdir}/usr/bin" "target/release/${_pkgname}.exe"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+}
+
