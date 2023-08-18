@@ -10,7 +10,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-rust")
 source=("https://github.com/Canop/broot/archive/v$pkgver/$_pkgname-v$pkgver.tar.gz")
 sha256sums=('cf223710bd75362d37312ef50b4966d57a79b36e3e645f940fd34569075f3974')
 # options=('')
-conflicts=("${MINGW_PACKAGE_PREFIX}-broot-git")
+conflicts=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 
 build() {
   cd $_pkgname-$pkgver
@@ -19,13 +19,13 @@ build() {
 
 package() {
   cd $_pkgname-$pkgver
-  install -Dt "$pkgdir"/usr/bin target/release/$_pkgname
+  install -Dt "${pkgdir}${MINGW_PREFIX}/bin" "target/release/$_pkgname"
   sed -i "s/#version/$pkgver/" man/page
   # Theoretically we could get the date from the CHANGELOG.md but it seems that the
   # CHANGELOG.md entry for the current version isn't actually in the current release.
   # changelog_date=$(sed -n "s/.*v$pkgver - \(.*\)$/\1/p" CHANGELOG.md)
   sed -i "s/#date//" man/page
-  install -Dm644 man/page "$pkgdir/usr/share/man/man1/$_pkgname.1"
-  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
-  install -Dm644 resources/icons/vscode/vscode.ttf "$pkgdir/usr/share/fonts/TTF/vscode.ttf"
+  install -Dm644 man/page "${pkgdir}${MINGW_PREFIX}/share/man/man1/$_pkgname.1"
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/$_pkgname/LICENSE"
+  install -Dm644 resources/icons/vscode/vscode.ttf "${pkgdir}${MINGW_PREFIX}/share/fonts/TTF/vscode.ttf"
 }

@@ -10,7 +10,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-meson" "${MINGW_PACKAGE_PREFIX}-nasm")
 source=("https://github.com/dubhater/vapoursynth-mvtools/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('3b5fdad2b52a2525764510a04af01eab3bc5e8fe6a02aba44b78955887a47d44')
 # options=('')
-conflicts=("${MINGW_PACKAGE_PREFIX}-vapoursynth-mvtools-git")
+conflicts=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 
 build() {
   cd $_pkgname-$pkgver
@@ -21,7 +21,7 @@ build() {
 
 package() {
   cd $_pkgname-$pkgver
-  install -Dm644 build/libavx2.a        "$pkgdir/ucrt64/lib/libavx2.a"
-  install -Dm644 build/libmvtools.dll   "$pkgdir/ucrt64/lib/libmvtools.dll"
-  install -Dm644 build/libmvtools.dll.a "$pkgdir/ucrt64/lib/libmvtools.dll.a"
+  install -Dm644 build/libavx2.a        "${pkgdir}${MINGW_PREFIX}/lib/libavx2.a"
+  install -Dm644 build/libmvtools.dll   "${pkgdir}${MINGW_PREFIX}/lib/libmvtools.dll"
+  install -Dm644 build/libmvtools.dll.a "${pkgdir}${MINGW_PREFIX}/lib/libmvtools.dll.a"
 }

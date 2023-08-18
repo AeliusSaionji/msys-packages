@@ -4,6 +4,7 @@ pkgver=0.5.1
 pkgrel=1
 pkgdesc='convert ansi color to html'
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
+conflicts=("${MINGW_PACKAGE_PREFIX}-${_realname}-git")
 url='https://github.com/theZiz/aha'
 license=('LGPLv2+')
 source=("${_realname}::https://github.com/theZiz/aha/archive/refs/tags/${pkgver}.tar.gz")
@@ -16,8 +17,8 @@ build() {
 
 package() {
   cd "${srcdir}/${_realname}-${pkgver}"
-  make PREFIX=/usr DESTDIR="${pkgdir}" install
-  install -Dm644 LICENSE.LGPLv2+ "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.LGPLv2+"
-  install -Dm644 LICENSE.MPL1.1 "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.MPL1.1"
-  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+  make PREFIX=/ DESTDIR="${pkgdir}${MINGW_PREFIX}" install
+  install -Dm644 LICENSE.LGPLv2+ "${pkgdir}${MINGW_PREFIX}/share/licenses/${pkgname}/LICENSE.LGPLv2+"
+  install -Dm644 LICENSE.MPL1.1 "${pkgdir}${MINGW_PREFIX}/share/licenses/${pkgname}/LICENSE.MPL1.1"
+  install -Dm644 README.md "${pkgdir}${MINGW_PREFIX}/share/doc/${pkgname}/README.md"
 }
