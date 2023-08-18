@@ -13,6 +13,7 @@ pkgdesc="A powerful light-weight programming language designed for extending app
 arch=('i686' 'x86_64')
 url="https://www.lua.org/"
 license=('spdx:MIT')
+makedepends=('gcc' 'ccache')
 source=("${url}/ftp/lua-${pkgver}.tar.gz"
         'lua.pc'
         '0001-When-running-lua-on-mintty-or-other.patch'
