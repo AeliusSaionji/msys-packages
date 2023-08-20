@@ -1,6 +1,6 @@
 _pkgname=broot
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}")
-pkgver=1.24.2
+pkgver=1.25.0
 pkgrel=1
 pkgdesc='Fuzzy Search + tree + cd; a better way to navigate directories'
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
@@ -8,7 +8,7 @@ url='https://dystroy.org/broot/'
 license=('MIT')
 makedepends=("${MINGW_PACKAGE_PREFIX}-rust")
 source=("https://github.com/Canop/broot/archive/v$pkgver/$_pkgname-v$pkgver.tar.gz")
-sha256sums=('cf223710bd75362d37312ef50b4966d57a79b36e3e645f940fd34569075f3974')
+sha256sums=('5b34f7e975e6bbf954f81f87af720559aa6a5916950275242d43fade906f20b1')
 # options=('')
 conflicts=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 
