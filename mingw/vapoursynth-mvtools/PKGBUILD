@@ -7,6 +7,7 @@ mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
 url='https://github.com/dubhater/vapoursynth-mvtools'
 license=('GPL2')
 makedepends=("${MINGW_PACKAGE_PREFIX}-meson" "${MINGW_PACKAGE_PREFIX}-nasm")
+depends=("${MINGW_PACKAGE_PREFIX}-vapoursynth" "${MINGW_PACKAGE_PREFIX}-fftw")
 source=("https://github.com/dubhater/vapoursynth-mvtools/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('3b5fdad2b52a2525764510a04af01eab3bc5e8fe6a02aba44b78955887a47d44')
 # options=('')
