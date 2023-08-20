@@ -1,0 +1,6 @@
+[submodule "msys/msysVim"]
+	path = msys/msysVim
+	url = git@github.com:AeliusSaionji/msysVim.git
+[submodule "msys/dvtm"]
+	path = msys/dvtm
+	url = https://github.com/martanne/dvtm/
