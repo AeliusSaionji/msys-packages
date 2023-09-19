@@ -1,0 +1,44 @@
+_realname=fx
+pkgbase="mingw-w64-${_realname}"
+pkgname="$MINGW_PACKAGE_PREFIX-${_realname}"
+pkgver=30.0.3
+pkgrel=1
+pkgdesc='interactive jq'
+arch=('any')
+# mingw_arch=(mingw64 ucrt64 clang64)
+url='https://github.com/antonmedv/fx'
+license=('spdx:MIT')
+makedepends=(
+  "$MINGW_PACKAGE_PREFIX-go"
+  "$MINGW_PACKAGE_PREFIX-nodejs"
+)
+options=('!strip')
+source=("https://github.com/antonmedv/fx/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('a5d0e808c7b9ed3ccc2a4064ed01c28a3c5f94d66a0fb4469ebcc997426fc361')
+
+build() {
+  cd "$srcdir/${_realname}-${pkgver}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export GOFLAGS="-trimpath -mod=readonly -modcacherw -buildvcs=false"
+  case "${CARCH}" in
+    i686|x86_64)
+      GOFLAGS+=" -buildmode=pie"
+      ;;
+  esac
+
+  go build
+}
+
+package() {
+  cd "$srcdir/${_realname}-${pkgver}"
+
+  ## License
+  install -Dm644 LICENSE "$pkgdir"$MINGW_PREFIX/share/licenses/${_realname}/LICENSE
+
+  ## Binaries
+  install -dm755 "$pkgdir"$MINGW_PREFIX/bin
+  install -Dm755 fx.exe "$pkgdir"$MINGW_PREFIX/bin/fx.exe
+}
