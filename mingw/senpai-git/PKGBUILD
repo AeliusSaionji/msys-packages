@@ -1,13 +1,13 @@
 _realname=senpai
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}-git")
-pkgver=v0.2.0.r34.gc9cbb9d
+pkgver=v0.3.0.r4.g09129df
 pkgrel=1
 pkgdesc='terminal irc client written in go'
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
-url='https://git.sr.ht/~taiite/senpai'
+url='https://git.sr.ht/~delthas/senpai/'
 license=('ISC')
 makedepends=("${MINGW_PACKAGE_PREFIX}-scdoc" "${MINGW_PACKAGE_PREFIX}-go")
-source=('git+https://git.sr.ht/~taiite/senpai')
+source=('git+https://git.sr.ht/~delthas/senpai')
 sha256sums=('SKIP')
 options=('!strip') #won't run otherwise
 
@@ -18,10 +18,9 @@ pkgver() {
 
 build() {
   cd "${srcdir}/senpai"
-  # cgo temp fix....
-  # firstly, this isn't the best way to pass goflags
-  # second, no idea what this does
-  env CGO_ENABLED=0 make all
+  #various fixes for mystery problems -aelius
+  go env -w CGO_ENABLED=0 GOFLAGS="-buildvcs=false"
+  make all
 }
 
 package() {
