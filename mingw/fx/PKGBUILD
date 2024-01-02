@@ -1,7 +1,7 @@
 _realname=fx
 pkgbase="mingw-w64-${_realname}"
 pkgname="$MINGW_PACKAGE_PREFIX-${_realname}"
-pkgver=30.0.3
+pkgver=31.0.0
 pkgrel=1
 pkgdesc='interactive jq'
 arch=('any')
@@ -14,7 +14,7 @@ makedepends=(
 )
 options=('!strip')
 source=("https://github.com/antonmedv/fx/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('a5d0e808c7b9ed3ccc2a4064ed01c28a3c5f94d66a0fb4469ebcc997426fc361')
+sha256sums=('8408047ef42506aac44aa805de209dd64ae4fc084e76bee8e24112ffbdc2d5dc')
 
 build() {
   cd "$srcdir/${_realname}-${pkgver}"
