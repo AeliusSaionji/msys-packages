@@ -1,6 +1,6 @@
-_realname=fx
-pkgbase="mingw-w64-${_realname}"
-pkgname="$MINGW_PACKAGE_PREFIX-${_realname}"
+_pkgname=fx
+pkgbase="mingw-w64-${_pkgname}"
+pkgname="$MINGW_PACKAGE_PREFIX-${_pkgname}"
 pkgver=31.0.0
 pkgrel=1
 pkgdesc='interactive jq'
@@ -17,7 +17,7 @@ source=("https://github.com/antonmedv/fx/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('8408047ef42506aac44aa805de209dd64ae4fc084e76bee8e24112ffbdc2d5dc')
 
 build() {
-  cd "$srcdir/${_realname}-${pkgver}"
+  cd "$srcdir/${_pkgname}-${pkgver}"
   export CGO_LDFLAGS="${LDFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CPPFLAGS="${CPPFLAGS}"
@@ -33,12 +33,12 @@ build() {
 }
 
 package() {
-  cd "$srcdir/${_realname}-${pkgver}"
+  cd "$srcdir/${_pkgname}-${pkgver}"
 
   ## License
-  install -Dm644 LICENSE "$pkgdir"$MINGW_PREFIX/share/licenses/${_realname}/LICENSE
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/${_pkgname}/LICENSE"
 
   ## Binaries
-  install -dm755 "$pkgdir"$MINGW_PREFIX/bin
-  install -Dm755 fx.exe "$pkgdir"$MINGW_PREFIX/bin/fx.exe
+  install -dm755 "${pkgdir}${MINGW_PREFIX}/bin"
+  install -Dm755 fx.exe "${pkgdir}${MINGW_PREFIX}/bin/fx.exe"
 }

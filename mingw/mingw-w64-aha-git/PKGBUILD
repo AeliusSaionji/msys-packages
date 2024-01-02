@@ -1,29 +1,30 @@
-_realname=aha
-pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}-git")
+_pkgname=aha
+pkgbase="mingw-w64-${_pkgname}"
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 pkgver=0.5.1
 pkgrel=1
 pkgdesc='Ansi HTML Adapter: convert ANSI escape sequences to HTML'
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
-conflicts=("${MINGW_PACKAGE_PREFIX}-${_realname}")
+conflicts=("${MINGW_PACKAGE_PREFIX}-${_pkgname}")
 url='https://github.com/theZiz/aha'
 license=('LGPLv2+' 'MPL1.1')
 source=("git+https://github.com/theZiz/aha.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "${srcdir}/${_realname}"
+  cd "${srcdir}/${_pkgname}"
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd "${srcdir}/${_realname}"
+  cd "${srcdir}/${_pkgname}"
   make
 }
 
 package() {
-  cd "${srcdir}/${_realname}"
+  cd "${srcdir}/${_pkgname}"
   make PREFIX="${MINGW_PREFIX}" DESTDIR="${pkgdir}" install
-  install -Dm644 LICENSE.LGPLv2+ "${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE.LGPLv2+"
-  install -Dm644 LICENSE.MPL1.1 "${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE.MPL1.1"
-  install -Dm644 README.md "${pkgdir}${MINGW_PREFIX}/share/doc/${_realname}/README.md"
+  install -Dm644 LICENSE.LGPLv2+ "${pkgdir}${MINGW_PREFIX}/share/licenses/${_pkgname}/LICENSE.LGPLv2+"
+  install -Dm644 LICENSE.MPL1.1 "${pkgdir}${MINGW_PREFIX}/share/licenses/${_pkgname}/LICENSE.MPL1.1"
+  install -Dm644 README.md "${pkgdir}${MINGW_PREFIX}/share/doc/${_pkgname}/README.md"
 }

@@ -1,4 +1,5 @@
 _pkgname=broot
+pkgbase="mingw-w64-${_pkgname}"
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 pkgver=1.21.3.1411.g79ab7ba
 pkgrel=1

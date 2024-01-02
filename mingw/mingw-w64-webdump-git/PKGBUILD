@@ -1,9 +1,10 @@
-_realname=webdump
-pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}-git"
-pkgver=r14.1d80db0
+_pkgname=webdump
+pkgbase="mingw-w64-${_pkgname}"
+pkgname="${MINGW_PACKAGE_PREFIX}-${_pkgname}-git"
+pkgver=r32.aceb260
 pkgrel=1
 pkgdesc='html to plaintext'
-mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
+mingw_arch=('mingw32' 'mingw64' 'clang64' 'clang32' 'clangarm64') # +mingw64, -ucrt64, others untested
 url='https://codemadness.org/git/webdump/log.html'
 license=('ISC')
 source=("git+git://git.codemadness.org/webdump")
@@ -15,7 +16,7 @@ pkgver() {
 }
 
 build() {
-  cd "${srcdir}/${_realname}"
+  cd "${srcdir}/${_pkgname}"
 
   # won't build in ucrt64 for some reason...
   # but will in mingw64
@@ -23,7 +24,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${_realname}"
+  cd "${srcdir}/${_pkgname}"
   make DESTDIR="${pkgdir}" PREFIX="${MINGW_PREFIX}" MANPREFIX="${MINGW_PREFIX}/share/man" install
   install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/${pkgname}/LICENSE"
   install -Dm644 README "${pkgdir}${MINGW_PREFIX}/share/doc/${pkgname}/README"

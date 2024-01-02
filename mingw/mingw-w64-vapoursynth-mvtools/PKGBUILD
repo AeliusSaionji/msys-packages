@@ -1,4 +1,5 @@
 _pkgname=vapoursynth-mvtools
+pkgbase="mingw-w64-${_pkgname}"
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}")
 pkgver=23
 pkgrel=1

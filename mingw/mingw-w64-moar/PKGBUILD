@@ -2,6 +2,7 @@
 # Contributor: Jameson Pugh <imntreal@gmail.com>
 
 _pkgname=moar
+pkgbase="mingw-w64-${_pkgname}"
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}")
 pkgver=1.15.3
 pkgrel=1

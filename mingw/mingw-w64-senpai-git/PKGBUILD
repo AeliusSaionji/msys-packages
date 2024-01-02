@@ -1,5 +1,6 @@
-_realname=senpai
-pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}-git")
+_pkgname=senpai
+pkgbase="mingw-w64-${_pkgname}"
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
 pkgver=v0.3.0.r4.g09129df
 pkgrel=1
 pkgdesc='terminal irc client written in go'

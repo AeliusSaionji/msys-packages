@@ -1,12 +1,13 @@
 _pkgname=mdcat
+pkgbase="mingw-w64-${_pkgname}"
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_pkgname}-git")
-pkgver=2.0.3.1011.g7f6322b
+pkgver=2.1.0.1050.g3088a19
 pkgrel=1
 pkgdesc='Fuzzy Search + tree + cd; a better way to navigate directories'
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
 url='https://dystroy.org/broot/'
 license=('MIT')
-makedepends=("${MINGW_PACKAGE_PREFIX}-rust") #not detected? "${MINGW_PACKAGE_PREFIX}-asciidoctor"
+makedepends=("${MINGW_PACKAGE_PREFIX}-rust") #Rust won't seem to use this: "${MINGW_PACKAGE_PREFIX}-asciidoctor"
 source=("git+https://github.com/swsnr/${_pkgname}.git")
 sha256sums=('SKIP')
 # options=('')
